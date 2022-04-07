@@ -1,11 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx
+  name: my-workflow
 spec:
   containers:
   - name: app
-    image: docker pull redabona/datacraft-k8s-workshop:toy-workflow
+    image: redabona/datacraft-k8s-workshop:toy-workflow
+    volumeMounts:
+    - mountPath: /data
+      name: pv0001
     ports:
     - containerPort: 80
+    imagePullPolicy: Always
+  volumes:
+      - name: pv0001
+        hostPath:
+            path: /data/pv0001
   
