@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: app
+    image: docker pull redabona/datacraft-k8s-workshop:toy-workflow
+    ports:
+    - containerPort: 80
+  

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app-label
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app-label
+  template:
+    metadata:
+      labels:
+        app: my-app-label
+    spec:
+      containers:
+      - name: my-app
+        image: redabona/datacraft-k8s-workshop:toy-server
+        ports:
+        - containerPort: 80
+        env:
+        - name: APP_ITEM_VALUE
+          value: "Configurable item"
+        - name: APP_SECRET_STRING
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: APP_SECRET_STRING
